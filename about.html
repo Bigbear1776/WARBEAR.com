@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>WARBEAR Electronics – About</title>
+  <meta name="description" content="Learn about WARBEAR Electronics and the engineer behind it." />
+  <link rel="stylesheet" href="assets/styles.css" />
+  <link rel="icon" href="assets/img/favicon.png" />
+</head>
+<body>
+<header class="site">
+  <div class="container navbar">
+    <a class="brand" href="index.html"><span class="mark">🐻</span> WARBEAR Electronics</a>
+    <button class="mobile-toggle" aria-label="Toggle menu">☰</button>
+    <nav class="links">
+      <a href="index.html">Home</a>
+      <a href="pedals.html">Pedals</a>
+      <a href="about.html">About</a>
+      <a href="tutoring.html">Tutoring</a>
+         <a href="picks.html">Accessories</a>
+      <a href="support.html">Support</a>
+    </nav>
+  </div>
+</header>
+<canvas id="particles"></canvas>
+<style>
+#particles {
+  position: fixed; top:0; left:0;
+  width:100%; height:100%;
+  z-index:-1; background:#ffffff;
+}
+</style>
+
+<script>
+const c = document.getElementById("particles");
+const ctx = c.getContext("2d");
+c.width = innerWidth; c.height = innerHeight;
+
+let particles = [];
+for(let i=0;i<100;i++){
+  particles.push({
+    x: Math.random()*c.width,
+    y: Math.random()*c.height,
+    dx: (Math.random()-0.5),
+    dy: (Math.random()-0.5),
+    color: `hsl(${Math.random()*360}, 100%, 50%)`  // random rainbow color
+  });
+}
+
+function draw(){
+  ctx.fillStyle="rgba(17,17,17,0.3)";
+  ctx.fillRect(0,0,c.width,c.height);
+
+  particles.forEach(p=>{
+    p.x+=p.dx; p.y+=p.dy;
+    if(p.x<0||p.x>c.width) p.dx*=-1;
+    if(p.y<0||p.y>c.height) p.dy*=-1;
+    ctx.fillStyle=p.color;
+    ctx.beginPath(); ctx.arc(p.x,p.y,2,0,Math.PI*2); ctx.fill();
+  });
+  requestAnimationFrame(draw);
+}
+
+draw();
+</script>
+
+
+<main class="container">
+  <section>
+    <h1>About WARBEAR</h1>
+    <p class="lead">I’m an electrical engineering major and a musician who loves building dependable pedals. My goal is to create high quality effects that can withstand the rigors of live performance.</p>
+    <p>I am currently working on my Bachelors in Electrical Engineering and Computer Engineering at Sacramento State University. My goal is to one day design and manufacture guitar pedals.</p>
+    <p>In addition to pedals I offer tutoring for STEM subjects as well as source code for various projects.</p>
+    <p>Every pedal built is built here in California with love and attention to detail.</p>
+    <p>If you have any questions, please don’t hesitate to <a href="support.html">contact me</a>.</p>
+    <p>My GITHUB <a href = "https://github.com/Bigbear1776" target = "_blank">https://github.com/Bigbear1776</a></p>
+  </section>
+
+  <section id="services" class="alt">
+    <h2>Services</h2>
+    <div class="grid cols-2">
+      <div class="card"><div class="body">
+        <h3>PCB Design</h3>
+        <p>KiCad/Altium, 2–6 layers, impedance control, DFM/DFT, bring-up and test.</p>
+      </div></div>
+      <div class="card"><div class="body">
+        <h3>Embedded Firmware</h3>
+        <p>C/C++ for STM32/ESP32, low-power strategies, drivers, RTOS, bootloaders.</p>
+      </div></div>
+      <div class="card"><div class="body">
+        <h3>Prototyping</h3>
+        <p>Rapid iteration, enclosure fit checks, automated test jigs.</p>
+      </div></div>
+      <div class="card"><div class="body">
+        <h3>Consulting</h3>
+        <p>Design reviews, part selection, power budgeting, EMI/ESD considerations.</p>
+      </div></div>
+    </div>
+  </section>
+
+  <section>
+    <h2>Toolchain</h2>
+    <ul>
+      <li>KiCad / Altium • STM32CubeMX • PlatformIO • Python • J-Link • Logic analyzers</li>
+    </ul>
+  </section>
+</main>
+
+<footer class="site">
+  <div class="container small">© <span id="year"></span> WARBEAR Electronics</div>
+</footer>
+<script src="assets/main.js"></script>
+<script>
+// Smooth scroll for all anchor links
+document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+  anchor.addEventListener("click", function(e) {
+    e.preventDefault();
+    document.querySelector(this.getAttribute("href")).scrollIntoView({
+      behavior: "smooth"
+    });
+  });
+});
+</script>
+</body>
+</html>

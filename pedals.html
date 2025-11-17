@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>WARBEAR Electronics – Pedals</title>
+  <meta name="description" content="Explore WARBEAR Electronics pedals and effects." />
+  <link rel="stylesheet" href="assets/styles.css" />
+  <link rel="icon" href="assets/img/favicon.png" />
+</head>
+<body>
+<header class="site">
+  <div class="container navbar">
+    <a class="brand" href="index.html"><span class="mark">🐻</span> WARBEAR Electronics</a>
+    <button class="mobile-toggle" aria-label="Toggle menu">☰</button>
+    <nav class="links">
+      <a href="index.html">Home</a>
+      <a href="pedals.html">Pedals</a>
+      <a href="about.html">About</a>
+      <a href="tutoring.html">Tutoring</a>
+         <a href="picks.html">Accessories</a>
+      <a href="support.html">Support</a>
+    </nav>
+  </div>
+</header>
+<h1 id="typewriter"></h1>
+<canvas id="particles"></canvas>
+<style>
+#particles {
+  position: fixed; top:0; left:0;
+  width:100%; height:100%;
+  z-index:-1; background:#ffffff;
+}
+</style>
+
+<script>
+const c = document.getElementById("particles");
+const ctx = c.getContext("2d");
+c.width = innerWidth; c.height = innerHeight;
+
+let particles = [];
+for(let i=0;i<100;i++){
+  particles.push({
+    x: Math.random()*c.width,
+    y: Math.random()*c.height,
+    dx: (Math.random()-0.5),
+    dy: (Math.random()-0.5),
+    color: `hsl(${Math.random()*360}, 100%, 50%)`  // random rainbow color
+  });
+}
+
+function draw(){
+  ctx.fillStyle="rgba(17,17,17,0.3)";
+  ctx.fillRect(0,0,c.width,c.height);
+
+  particles.forEach(p=>{
+    p.x+=p.dx; p.y+=p.dy;
+    if(p.x<0||p.x>c.width) p.dx*=-1;
+    if(p.y<0||p.y>c.height) p.dy*=-1;
+    ctx.fillStyle=p.color;
+    ctx.beginPath(); ctx.arc(p.x,p.y,2,0,Math.PI*2); ctx.fill();
+  });
+  requestAnimationFrame(draw);
+}
+
+draw();
+</script>
+
+
+<script>
+const text = "Essential Effects. Great at home and built to Tour.";
+let i = 0;
+
+function typeWriter() {
+  if (i < text.length) {
+    document.getElementById("typewriter").innerHTML += text.charAt(i);
+    i++;
+    setTimeout(typeWriter, 80);
+  } else {
+    // blinking cursor
+    setInterval(() => {
+      let el = document.getElementById("typewriter");
+      el.innerHTML = el.innerHTML.endsWith("|") ? el.innerHTML.slice(0,-1) : el.innerHTML + "|";
+    }, 500);
+  }
+}
+window.onload = typeWriter;
+</script>
+
+
+<main class="container">
+  <section>
+    <h1>Pedals</h1>
+    <p class="lead">Wide range of effects pedals for every musician.</p>
+  </section>
+
+  <section id="catalog">
+    <div class="grid cols-2">
+      <article class="card">
+        <img src="assets/img/placeholder-1.jpg" alt="Cenotaph Distortion Pedal">
+        <div class="body">
+          <h3>Cenotaph</h3>
+          <p>Distortion Pedal inspired by the legendary sound of "Bolt Thrower."</p>
+          <a class="btn primary block" href="cenotaph-distortion.html">View Details</a>
+        </div>
+      </article>
+
+      <article class="card">
+        <img src="assets/img/placeholder-2.jpg" alt="Neptune Chorus Pedal">
+        <div class="body">
+          <h3>Neptune Chorus</h3>
+          <p>Chorus Pedal capable of handling high gain.</p>
+          <a class="btn primary block" href="neptune-chorus.html">View Details</a>
+        </div>
+      </article>
+    </div>
+  </section>
+
+  <section class="alt" style="margin-top:24px;">
+    <h2>Pedal Specifications</h2>
+    <div class="card">
+      <table class="table">
+        <thead><tr><th>Pedal</th><th>Type</th><th>Bypass</th><th>Power</th><th>Status</th></tr></thead>
+        <tbody>
+          <tr><td>Cenotaph</td><td>High-Gain Distortion</td><td>True Bypass</td><td>9V DC</td><td>Coming Soon</td></tr>
+          <tr><td>Neptune Chorus</td><td>Analog Chorus</td><td>True Bypass</td><td>9V DC</td><td>Coming Soon</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </section>
+</main>
+
+<footer class="site">
+  <div class="container small">© <span id="year"></span> WARBEAR Electronics</div>
+</footer>
+<script src="assets/main.js"></script>
+<script>
+// Smooth scroll for all anchor links
+document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+  anchor.addEventListener("click", function(e) {
+    e.preventDefault();
+    document.querySelector(this.getAttribute("href")).scrollIntoView({
+      behavior: "smooth"
+    });
+  });
+});
+</script>
+</body>
+</html>

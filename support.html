@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>WARBEAR Electronics – Support</title>
+  <meta name="description" content="Contact WARBEAR Electronics for support and inquiries." />
+  <link rel="stylesheet" href="assets/styles.css" />
+  <link rel="icon" href="assets/img/favicon.png" />
+</head>
+<body>
+<header class="site">
+  <div class="container navbar">
+    <a class="brand" href="index.html"><span class="mark">🐻</span> WARBEAR Electronics</a>
+    <button class="mobile-toggle" aria-label="Toggle menu">☰</button>
+    <nav class="links">
+      <a href="index.html">Home</a>
+      <a href="pedals.html">Pedals</a>
+      <a href="about.html">About</a>
+      <a href="tutoring.html">Tutoring</a>
+         <a href="picks.html">Accessories</a>
+      <a href="support.html">Support</a>
+    </nav>
+  </div>
+</header>
+<canvas id="particles"></canvas>
+<style>
+#particles {
+  position: fixed; top:0; left:0;
+  width:100%; height:100%;
+  z-index:-1; background:#ffffff;
+}
+</style>
+
+<script>
+const c = document.getElementById("particles");
+const ctx = c.getContext("2d");
+c.width = innerWidth; c.height = innerHeight;
+
+let particles = [];
+for(let i=0;i<100;i++){
+  particles.push({
+    x: Math.random()*c.width,
+    y: Math.random()*c.height,
+    dx: (Math.random()-0.5),
+    dy: (Math.random()-0.5),
+    color: `hsl(${Math.random()*360}, 100%, 50%)`  // random rainbow color
+  });
+}
+
+function draw(){
+  ctx.fillStyle="rgba(17,17,17,0.3)";
+  ctx.fillRect(0,0,c.width,c.height);
+
+  particles.forEach(p=>{
+    p.x+=p.dx; p.y+=p.dy;
+    if(p.x<0||p.x>c.width) p.dx*=-1;
+    if(p.y<0||p.y>c.height) p.dy*=-1;
+    ctx.fillStyle=p.color;
+    ctx.beginPath(); ctx.arc(p.x,p.y,2,0,Math.PI*2); ctx.fill();
+  });
+  requestAnimationFrame(draw);
+}
+
+draw();
+</script>
+
+
+<main class="container">
+  <section>
+    <h1>Support</h1>
+    <p class="lead">Need help with an order or a board? Send details and we’ll get back within 1–2 business days.</p>
+    <div class="alert small">For now, the form uses your email client. Later, we can switch to a backend like Netlify Forms or Formspree.</div>
+  </section>
+
+  <section class="card">
+    <div class="body">
+      <form class="form" action="mailto:nlarinno@gmail.com" method="post" enctype="text/plain">
+        <div class="row">
+          <div>
+            <label for="name">Name</label>
+            <input id="name" name="name" placeholder="Your name" required />
+          </div>
+          <div>
+            <label for="email">Email</label>
+            <input id="email" name="email" type="email" placeholder="you@example.com" required />
+          </div>
+        </div>
+        <label for="subject">Subject</label>
+        <input id="subject" name="subject" placeholder="e.g., WB-Node issue" required />
+        <label for="message">Message</label>
+        <textarea id="message" name="message" rows="6" placeholder="How can we help?" required></textarea>
+        <div class="actions">
+          <button class="btn primary" type="submit">Send</button>
+          <a class="btn" href="mailto:nlarinno@gmail.com">Open in email app</a>
+        </div>
+      </form>
+    </div>
+  </section>
+
+  <section>
+    <h2>FAQ</h2>
+    <details><summary>Do you ship internationally?</summary><p>Planned. We’ll announce regions at launch.</p></details>
+    <details><summary>Where are the docs?</summary><p>Datasheets and guides will appear on each product page.</p></details>
+  </section>
+</main>
+
+<footer class="site">
+  <div class="container small">© <span id="year"></span> WARBEAR Electronics</div>
+</footer>
+<script src="assets/main.js"></script>
+<script>
+// Smooth scroll for all anchor links
+document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+  anchor.addEventListener("click", function(e) {
+    e.preventDefault();
+    document.querySelector(this.getAttribute("href")).scrollIntoView({
+      behavior: "smooth"
+    });
+  });
+});
+</script>
+</body>
+</html>

@@ -1,0 +1,198 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>WARBEAR Electronics – Tutoring</title>
+  <meta name="description" content="One-on-one tutoring in math, circuits, physics, and embedded systems." />
+  <meta name="theme-color" content="#222222" />
+  <link rel="stylesheet" href="assets/styles.css" />
+  <link rel="icon" href="assets/img/favicon.png" />
+</head>
+<body>
+<header class="site">
+  <div class="container navbar">
+    <a class="brand" href="index.html"><span class="mark">🐻</span> WARBEAR Electronics</a>
+    <button class="mobile-toggle" aria-label="Toggle menu">☰</button>
+    <nav class="links">
+      <a href="index.html">Home</a>
+      <a href="pedals.html">Pedals</a>
+      <a href="about.html">About</a>
+      <a href="tutoring.html">Tutoring</a>
+         <a href="picks.html">Accessories</a>
+      <a href="support.html">Support</a>
+    </nav>
+  </div>
+</header>
+<canvas id="particles"></canvas>
+<style>
+#particles {
+  position: fixed; top:0; left:0;
+  width:100%; height:100%;
+  z-index:-1; background:#ffffff;
+}
+</style>
+
+<script>
+const c = document.getElementById("particles");
+const ctx = c.getContext("2d");
+c.width = innerWidth; c.height = innerHeight;
+
+let particles = [];
+for(let i=0;i<100;i++){
+  particles.push({
+    x: Math.random()*c.width,
+    y: Math.random()*c.height,
+    dx: (Math.random()-0.5),
+    dy: (Math.random()-0.5),
+    color: `hsl(${Math.random()*360}, 100%, 50%)`  // random rainbow color
+  });
+}
+
+function draw(){
+  ctx.fillStyle="rgba(17,17,17,0.3)";
+  ctx.fillRect(0,0,c.width,c.height);
+
+  particles.forEach(p=>{
+    p.x+=p.dx; p.y+=p.dy;
+    if(p.x<0||p.x>c.width) p.dx*=-1;
+    if(p.y<0||p.y>c.height) p.dy*=-1;
+    ctx.fillStyle=p.color;
+    ctx.beginPath(); ctx.arc(p.x,p.y,2,0,Math.PI*2); ctx.fill();
+  });
+  requestAnimationFrame(draw);
+}
+
+draw();
+</script>
+
+<main>
+  <section class="hero container">
+    <h1>Tutoring: STEM</h1>
+    <p class="lead">One-on-one help for high school and college students in STEM.</p>
+    <p>
+     <a class="btn book" href="#book">Book a Session</a>
+     <a class="btn subjects" href="#subjects">See Subjects</a>
+ </p>
+  </section>
+
+  <section id="subjects" class="container">
+    <h2>Subjects I Tutor</h2>
+    <div class="grid cols-3">
+      <div class="card"><div class="body">
+        <h3>Mathematics</h3>
+        <ul>
+          <li>Algebra I &amp; II</li>
+          <li>Geometry</li>
+          <li>Pre-calculus &amp; Trig</li>
+          <li>Calculus I–III</li>
+          <li>Differential Equations</li>
+        </ul>
+      </div></div>
+      <div class="card"><div class="body">
+        <h3>Circuits &amp; Electronics</h3>
+        <ul>
+          <li>DC/AC analysis, Thevenin/Norton</li>
+          <li>Op-amps, filters, BJT/MOSFET basics</li>
+          <li>Power (buck/boost), layout &amp; lab skills</li>
+        </ul>
+      </div></div>
+      <div class="card"><div class="body">
+        <h3>Physics &amp; Embedded</h3>
+        <ul>
+          <li>Mechanics &amp; E&amp;M (Maxwell at intro level)</li>
+          <li>Signals &amp; Systems (Fourier/Laplace)</li>
+          <li>Embedded: C/C++ for STM32/ESP32, GPIO/ADC/UART</li>
+        </ul>
+      </div></div>
+    </div>
+  </section>
+
+  <section class="alt">
+    <div class="container">
+      <h2>Rates &amp; Packages</h2>
+      <div class="grid cols-3">
+        <div class="card"><div class="body">
+          <span class="badge">Starter</span>
+          <h3>Single Session</h3>
+          <p>60 minutes • Focus on one topic or problem set.</p>
+          <p><strong>$20 zoom, $30-$50 in-person depending on location</strong> / session</p>
+        </div></div>
+        <div class="card"><div class="body">
+          <span class="badge">Popular</span>
+          <h3>4-Pack</h3>
+          <p>Four 60-min sessions • Weekly or flexible scheduling.</p>
+          <p><strong>$70 Zoom Only</strong> total</p>
+        </div></div>
+      </div>
+      <p class="small">In person sessions available. Zoom/Meet if preferred.</p>
+    </div>
+  </section>
+
+  <section class="container" id="book">
+    <h2>Book a Session</h2>
+    <div class="grid cols-2">
+      <div class="card"><div class="body">
+        <h3>Request Form</h3>
+        <form class="form" action="mailto:support@warbear-electronics.com" method="post" enctype="text/plain">
+          <div class="row">
+            <div>
+              <label for="name">Name</label>
+              <input id="name" name="name" placeholder="Your name" required />
+            </div>
+            <div>
+              <label for="email">Email</label>
+              <input id="email" name="email" type="email" placeholder="you@example.com" required />
+            </div>
+          </div>
+          <label for="course">Course/Topic</label>
+          <input id="course" name="course" placeholder="e.g., Circuits I, Calc II series test" required />
+          <label for="when">Preferred Times</label>
+          <input id="when" name="when" placeholder="e.g., Tue/Thu evenings, this weekend" />
+          <label for="goals">Goals</label>
+          <textarea id="goals" name="goals" rows="5" placeholder="Describe what you want to work on (chapters, problem types, exam date)"></textarea>
+          <div class="actions">
+            <button class="btn primary" type="submit">Send Request</button>
+            <a class="btn" href="mailto:nlarinno@gmail.com">Email Instead</a>
+          </div>
+        </form>
+      </div></div>
+
+      <div>
+        <div class="card"><div class="body">
+          <h3>How It Works</h3>
+          <ol>
+            <li>You submit the request with topics and timing.</li>
+            <li>I reply with a time slot and quick prep plan.</li>
+            <li>We meet on Zoom/Meet; notes &amp; practice problems provided.</li>
+          </ol>
+        </div></div>
+        <div class="card"><div class="body">
+          <h3>Policies</h3>
+          <ul>
+            <li>24-hour reschedule window</li>
+            <li>Payment after session (card/invoice)</li>
+            <li>Homework help = learning, not answers-for-grades</li>
+          </ul>
+        </div></div>
+      </div>
+    </div>
+  </section>
+
+<footer class="site">
+  <div class="container small">© <span id="year"></span> WARBEAR Electronics</div>
+</footer>
+<script src="assets/main.js"></script>
+<script>
+// Smooth scroll for all anchor links
+document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+  anchor.addEventListener("click", function(e) {
+    e.preventDefault();
+    document.querySelector(this.getAttribute("href")).scrollIntoView({
+      behavior: "smooth"
+    });
+  });
+});
+</script>
+</body>
+</html>

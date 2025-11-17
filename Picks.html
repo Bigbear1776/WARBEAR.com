@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>WARBEAR Electronics – Accessories</title>
+  <meta name="description" content="Explore WARBEAR Electronics accessories." />
+  <link rel="stylesheet" href="assets/styles.css" />
+  <link rel="icon" href="assets/img/favicon.png" />
+</head>
+<body>
+<header class="site">
+  <div class="container navbar">
+    <a class="brand" href="index.html"><span class="mark">🐻</span> WARBEAR Electronics</a>
+    <button class="mobile-toggle" aria-label="Toggle menu">☰</button>
+    <nav class="links">
+      <a href="index.html">Home</a>
+      <a href="pedals.html">Pedals</a>
+      <a href="about.html">About</a>
+      <a href="tutoring.html">Tutoring</a>
+         <a href="picks.html">Accessories</a>
+      <a href="support.html">Support</a>
+    </nav>
+  </div>
+</header>
+<h1 id="typewriter"></h1>
+<canvas id="particles"></canvas>
+<style>
+#particles {
+  position: fixed; top:0; left:0;
+  width:100%; height:100%;
+  z-index:-1; background:#ffffff;
+}
+</style>
+
+<script>
+const c = document.getElementById("particles");
+const ctx = c.getContext("2d");
+c.width = innerWidth; c.height = innerHeight;
+
+let particles = [];
+for(let i=0;i<100;i++){
+  particles.push({
+    x: Math.random()*c.width,
+    y: Math.random()*c.height,
+    dx: (Math.random()-0.5),
+    dy: (Math.random()-0.5),
+    color: `hsl(${Math.random()*360}, 100%, 50%)`  // random rainbow color
+  });
+}
+
+function draw(){
+  ctx.fillStyle="rgba(17,17,17,0.3)";
+  ctx.fillRect(0,0,c.width,c.height);
+
+  particles.forEach(p=>{
+    p.x+=p.dx; p.y+=p.dy;
+    if(p.x<0||p.x>c.width) p.dx*=-1;
+    if(p.y<0||p.y>c.height) p.dy*=-1;
+    ctx.fillStyle=p.color;
+    ctx.beginPath(); ctx.arc(p.x,p.y,2,0,Math.PI*2); ctx.fill();
+  });
+  requestAnimationFrame(draw);
+}
+
+draw();
+</script>
+
+<script>
+const text = "Accessories";
+let index = 0;
+
+function typeWriter() {
+  if (index < text.length) {
+    document.getElementById("typewriter").innerHTML += text.charAt(index);
+    index++;
+    setTimeout(typeWriter, 150);
+  }
+}
+typeWriter();
+</script>
+
+<main class="container">
+    <section>
+        <h1>Accessories</h1>
+        <p> Explore our range of picks and accessories tailored for your musical experience.</p>        
+        </section>
+    <article class="card">
+        <img src="assets/img/placeholder-2.jpg" alt="Guitar Picks">
+        <div class="body">
+        <h2>Guitar Picks</h2>
+        <p>Discover our selection of Brass Picks made of high quality cymbals and percussion.</p>
+        <ul>
+            <li>Jazz Brass picks</li>
+            <li>Standard Brass picks</li>
+            <li>Strumming Brass picks</li>
+        </ul>
+        </div>
+    </article>
+       
+        <div class="grid cols-3">
+        <article class="card">
+        <img src="assets/img/placeholder-2.jpg" alt="Jazz Brass Pick">
+        <div class="body">
+          <h3>Jazz Brass Pick</h3>
+          <p>Brass Pick designed for fast technical playing.</p>
+          <a class="btn block primary" href="jazz-brass-pick.html">View Details</a>
+        </div>
+      </article>
+
+      
+      <article class="card">
+        <img src="assets/img/placeholder-2.jpg" alt="Standard Brass Pick">
+        <div class="body">
+          <h3>Standard Brass Pick</h3>
+          <p>Brass Pick designed for all players.</p>
+          <a class="btn block primary" href="standard-brass-pick.html">View Details</a>
+        </div>
+      </article>
+
+      <article class="card">
+        <img src="assets/img/placeholder-2.jpg" alt="Strumming Brass Pick">
+        <div class="body">
+          <h3>Strumming Brass Pick</h3>
+          <p>Brass Pick designed for strumming.</p>
+          <a class="btn block primary" href="strumming-brass-pick.html">View Details</a>
+        </div>
+      </article>
+
+      <footer class="site">
+  <div class="container small">© <span id="year"></span> WARBEAR Electronics</div>
+</footer>
+<script src="assets/main.js"></script>
+<script>
+// Smooth scroll for all anchor links
+document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+  anchor.addEventListener("click", function(e) {
+    e.preventDefault();
+    document.querySelector(this.getAttribute("href")).scrollIntoView({
+      behavior: "smooth"
+    });
+  });
+});
+</script>
+</body>
+</html>
